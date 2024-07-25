@@ -1,156 +1,315 @@
 @charset "UTF-8";
-/* ------ 共通 */
+/* ------ Common styles */
+:root {
+  --primary-color: #4A90E2;
+  --secondary-color: #50E3C2;
+  --background-color: #F0F4F8;
+  --text-color: #333;
+  --light-gray: #E0E0E0;
+}
 
 html,
 body {
   overflow-x: hidden;
+  background-color: var(--background-color);
 }
 
 body {
-  color: #000000;
+  color: var(--text-color);
   font-family: 'Noto Sans JP', sans-serif;
   padding-bottom: 0;
+  line-height: 1.6;
+}
 
+/* ------ Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
+  margin-bottom: 1rem;
 }
 
 p {
-  line-height: 2.0em;
-  font-weight: 100;
-  font-style: normal;
-  font-size: 14px;
-
+  line-height: 1.8;
+  font-weight: 300;
+  font-size: 16px;
 }
-/*--- ナビゲーションメニュー  */
+
+/* ------ Navigation menu */
+.navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}
+
 .navbar_brand_logo {
-  width: 32px;
-  height: 32px;
-  display: inline-block;
+  width: 40px;
+  height: 40px;
   margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.navbar_brand_logo:hover {
+  transform: scale(1.1);
 }
 
 .my_navbar_brand,
 .my_nav_link {
-  font-size: 16px;
-  font-family: 'Lora', serif;
-  color: #000000 !important;
+  font-size: 18px;
+  color: var(--text-color) !important;
+  transition: color 0.3s ease;
+}
+
+.my_nav_link {
+  position: relative;
+}
+
+.my_nav_link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.my_nav_link:hover::after {
+  transform: scaleX(1);
 }
 
 .navbar-toggler {
-  padding: 0 !important;
   border: none;
+  padding: 0.25rem 0.75rem;
 }
 
-#hamburger_btn_check:checked~.hamburger_btn .btn_close {
-  display: block;
+/* ------ Main content */
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
 }
-
-#hamburger_btn_check:checked~.hamburger_btn .btn_open {
-  display: none;
-}
-
-.btn_close {
-  display: none;
-}
-
-#hamburger_btn_check {
-  display: none;
-}
-
-
-/*--------body部分 */
 
 #title {
-  font-size: 50px;
+  font-size: 3.5rem;
   font-weight: bold;
-  text-shadow: 1px 1px 2px gray;
   text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+#title::before,
+#title::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--secondary-color);
+}
+
+#title::before {
+  top: 0;
+  left: -100%;
+  animation: slide-in 1s forwards;
+}
+
+#title::after {
+  bottom: 0;
+  right: -100%;
+  animation: slide-in 1s 0.5s forwards;
+}
+
+@keyframes slide-in {
+  100% { transform: translateX(100%); }
 }
 
 #btn {
   appearance: none;
   border: 0;
-  border-radius: 5px;
-  background: #4676D7;
-  padding: 8px 16px;
-  font-size: 16px;
-  margin-top: 20px;
-  margin-bottom: 40p;
+  border-radius: 50px;
+  background: var(--primary-color);
+  color: #fff;
+  padding: 15px 30px;
   font-size: 20px;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 30%);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+#btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+#btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .first {
   text-align: center;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-table.support_table {
-  table-layout: fixed;
-  width: 300px;
-  margin: auto;
+.first:hover {
+  transform: translateY(-5px);
 }
 
-table.support_table th{
-  border: 1px solid #000;
-  color: #696969;
-  padding: 7px;
-  vertical-align: middle;
+/* ------ Table styles */
+.support_table {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-table.support_table td {
-  padding: 7px;
-  font-size: 14px;
-  border: 1px solid #000;
-  vertical-align: middle;
+.support_table th,
+.support_table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--light-gray);
+  transition: background-color 0.3s ease;
+}
+
+.support_table th {
+  background-color: var(--primary-color);
+  font-weight: bold;
+  color: #fff;
+}
+
+.support_table tr:hover td {
+  background-color: #f0f0f0;
+}
+
+.support_table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ------ Result styles */
+#result4 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+#result4 img {
+  max-width: 400px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+#result4 img:hover {
+  transform: scale(1.05);
 }
 
 #result5 {
   font-weight: bold;
-  font-size: 20px;
-  text-align: left;
-}
-
-#result4 {
-  margin-top: 30px;
-  margin-bottom: 20px;
+  font-size: 28px;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
 }
 
 #result6 {
-  padding-top: 20px;
-  padding-bottom: 40px;
-  font-size: 20px;
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* ----------------------------------------------- フッター */
+/* ------ Footer */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 3rem 0;
+  margin-top: 3rem;
+}
 
-.copy_right {
-  font-size: 14px;
-  bottom: 1rem;
-  left: 12px;
+.footer_text,
+.footer_text2 {
   text-align: center;
-}
-
-.copy_right>p {
-  margin-right: 5rem;
-  margin-bottom: 0;
+  margin-bottom: 1rem;
 }
 
 .footer_text {
-  margin-top: 60px;
-  margin-bottom: 20px;
-  padding-top: 20px;
   font-size: 20px;
-  font-family: 'Lora', serif;
-  text-align: center;
+  font-weight: bold;
 }
 
 .footer_text2 {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 15px;
-  text-align: center;
-  padding-top: 10px;
-}
-.change-red {
-  color: red;
+  font-size: 16px;
 }
 
+.copy_right {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 1rem;
+  opacity: 0.7;
+}
+
+/* ------ Responsive adjustments */
+@media (max-width: 768px) {
+  #title {
+    font-size: 2.8rem;
+  }
+
+  #btn {
+    font-size: 18px;
+    padding: 12px 24px;
+  }
+
+  .support_table {
+    font-size: 14px;
+  }
+
+  #result5 {
+    font-size: 24px;
+  }
+
+  #result6 {
+    font-size: 16px;
+  }
+}
+
+/* ------ Animation for gacha result */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#result4, #result5, #result6 {
+  animation: fadeInUp 0.6s ease-out;
+}
